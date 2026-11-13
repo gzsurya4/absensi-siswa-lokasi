@@ -251,6 +251,46 @@
 @keyframes absSh{to{background-position:-200% 0}}
 #absenRoot .previewtag{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:125;background:var(--purple);color:#fff;font-size:9px;font-weight:700;padding:1px 10px 2px;border-radius:0 0 10px 10px;letter-spacing:.08em;pointer-events:none}
 @media(prefers-reduced-motion:reduce){#absenRoot *{animation:none!important;transition:none!important}}
+</style><style>
+.mode-card{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:var(--surface-2);margin-bottom:12px}
+.mode-card .ic{width:22px;height:22px;flex:none;margin-top:2px}
+.mode-card b{display:block;font-size:14px}.mode-card span{display:block;font-size:12.5px;opacity:.8;margin-top:2px}
+.mode-card.pjj{background:rgba(245,181,11,.14);border-color:rgba(245,181,11,.55)}
+.mode-card.sekolah{background:rgba(22,163,74,.10);border-color:rgba(22,163,74,.4)}
+.mode-opts{display:grid;gap:10px}.mode-opt{display:flex;gap:12px;align-items:flex-start;padding:14px;border:2px solid var(--border);border-radius:14px;cursor:pointer;background:var(--surface)}
+.mode-opt input{margin-top:4px;width:18px;height:18px}.mode-opt b{display:block}.mode-opt span{font-size:12.5px;opacity:.8}.mode-opt:has(input:checked){border-color:#6d5dfc;background:rgba(109,93,252,.08)}
+.hero .quote{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.16);font-size:13px;line-height:1.45;font-style:italic}
+.hero .quote small{display:block;margin-top:4px;font-style:normal;opacity:.9;font-size:11.5px}
+.cal-h{padding:0 2px}.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-w{text-align:center;font-size:11px;font-weight:600;opacity:.65;padding:2px 0}
+.cal-d{aspect-ratio:1;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:inherit;font:inherit;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;min-height:34px}
+.cal-d.e{border:0;background:transparent;cursor:default}
+.cal-d.g{background:#16A34A;border-color:#16A34A;color:#fff}.cal-d.r{background:#DC2626;border-color:#DC2626;color:#fff}.cal-d.y{background:#F5B50B;border-color:#F5B50B;color:#3a2a00}
+.cal-d.today{box-shadow:0 0 0 2px #6d5dfc}.cal-d.sel{outline:2px solid currentColor;outline-offset:1px}
+.cal-leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px}.cal-leg span{display:inline-flex;align-items:center;gap:6px}
+.cal-leg i{width:12px;height:12px;border-radius:4px;display:inline-block;border:1px solid var(--border)}
+.cal-leg i.g{background:#16A34A}.cal-leg i.r{background:#DC2626}.cal-leg i.y{background:#F5B50B}.cal-leg i.n{background:var(--surface-2)}
+.cal-detail{font-size:13px;padding:10px 12px;border-radius:12px;background:var(--surface-2);line-height:1.5}
+.tabs-s{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+#printHost{display:none}
+@media print{
+@page{size:A4;margin:14mm}
+body>*:not(#printHost){display:none!important}
+html,body{background:#fff!important}
+#printHost{display:block!important;color:#000;font:12px/1.4 Arial,sans-serif}
+#printHost .kop{display:flex;gap:12px;align-items:center;border-bottom:3px double #000;padding-bottom:8px;margin-bottom:10px}
+#printHost .kop img{width:56px;height:56px;object-fit:contain}
+#printHost .kop b{font-size:15px;display:block}
+#printHost h1{font-size:15px;margin:8px 0 2px;text-align:center}
+#printHost .sub{text-align:center;margin-bottom:8px}
+#printHost table{width:100%;border-collapse:collapse;margin:6px 0}
+#printHost th,#printHost td{border:1px solid #000;padding:3px 5px;text-align:left;font-size:11px}
+#printHost th{background:#eee}
+#printHost .pg{page-break-after:always;break-after:page}#printHost .pg:last-child{page-break-after:auto}
+#printHost .ttd{margin-top:18px;display:flex;justify-content:flex-end}#printHost .ttd div{width:200px;text-align:center}
+#printHost .foot{margin-top:10px;font-size:10px;color:#444}
+#printHost tr{page-break-inside:avoid}
+}
 </style>
 </head>
 <body style="margin:0">
@@ -343,7 +383,7 @@ const APP = {
   maxFoto: 720, kualitasFoto: 0.72, iter: 60000
 };
 const DEFAULT_PUBLIC = { namaSekolah: 'SMAN 1 Ciwaringin', loginJudul: 'Absensi Siswa', loginSub: 'SMAN 1 Ciwaringin', sidebarNama: 'Absensi Siswa', sidebarSub: 'SMAN 1 Ciwaringin', logo: '' };
-const DEFAULT_JADWAL = { jamBukaMasuk: '05:00', jamMasuk: '06:30', jamTutupMasuk: '12:00', jamPulang: '14:40', jamTutupPulang: '18:00', hariAktif: [1, 2, 3, 4, 5], hariLibur: [], lokasi: { lat: -6.7412, lng: 108.355, radius: 150, maxAkurasi: 100, wajib: true } };
+const DEFAULT_JADWAL = { jamBukaMasuk: '05:00', jamMasuk: '06:30', jamTutupMasuk: '12:00', jamPulang: '14:40', jamTutupPulang: '18:00', hariAktif: [1, 2, 3, 4, 5], hariLibur: [], modeAbsen: 'sekolah', lokasi: { lat: -6.7412, lng: 108.355, radius: 150, maxAkurasi: 100, wajib: true } };
 
 const S = { user: null, pub: Object.assign({}, DEFAULT_PUBLIC), jadwal: null, route: null, params: {}, installEvt: null, timers: [], cache: {}, avatar: '', loginMode: 'user', pv: { jam: true, lokasi: 'sekolah' }, theme: 'auto' };
 
@@ -398,8 +438,16 @@ function normJadwal(j) {
   x.bukaMasukM = hmToMin(x.jamBukaMasuk); x.masukM = hmToMin(x.jamMasuk); x.tutupMasukM = hmToMin(x.jamTutupMasuk);
   x.pulangM = hmToMin(x.jamPulang); x.tutupPulangM = hmToMin(x.jamTutupPulang);
   x.lokasi.cos = +Math.cos(x.lokasi.lat * Math.PI / 180).toFixed(6);
+  x.modeAbsen = x.modeAbsen === 'pjj' ? 'pjj' : 'sekolah';
   return x;
 }
+/* ----- Mode absen: di Sekolah (KBM) atau PJJ (di rumah, lokasi dimatikan) ----- */
+const isPJJ = j => !!j && j.modeAbsen === 'pjj';
+const lokasiWajib = j => !isPJJ(j) && !!(j.lokasi && j.lokasi.wajib);
+const modeInfo = j => (isPJJ(j)
+  ? { nama: 'PJJ (Pembelajaran Jarak Jauh)', singkat: 'Absen PJJ', ket: 'Absen dari rumah dengan foto selfie. Lokasi tidak diperlukan.', icon: 'home' }
+  : { nama: 'Absen di Sekolah (KBM)', singkat: 'Radius ' + j.lokasi.radius + ' m', ket: 'Absen di area sekolah (radius ' + j.lokasi.radius + ' m) dengan foto selfie dan GPS.', icon: 'pin' });
+const modeBanner = j => { const m = modeInfo(j); return '<div class="mode-card ' + (isPJJ(j) ? 'pjj' : 'sekolah') + '">' + ic(m.icon) + '<div><b>Sistem absen aktif: ' + esc(m.nama) + '</b><span>' + esc(m.ket) + '</span></div></div>'; };
 const isSchool = (ds, j) => j.hariAktif.indexOf(dowOf(ds)) > -1 && j.hariLibur.indexOf(ds) < 0;
 function haversine(a, b, c, d) {
   const R = 6371000, r = x => x * Math.PI / 180, dl = r(c - a), dg = r(d - b);
@@ -421,9 +469,9 @@ function makeCtx(j, recs, izinList) {
   return ctx;
 }
 function dayOf(ctx, u, date) {
-  const base = { tanggal: date, status: '', jamMasuk: '', jamPulang: '', fotoMasukId: '', fotoPulangId: '', lokasi: '', jarak: '', catatan: '', curiga: '' };
+  const base = { tanggal: date, mode: '', status: '', jamMasuk: '', jamPulang: '', fotoMasukId: '', fotoPulangId: '', lokasi: '', jarak: '', catatan: '', curiga: '' };
   const rec = ctx.abs[u.userId + '|' + date];
-  if (rec) return Object.assign(base, { status: rec.status || 'Hadir', jamMasuk: rec.jamMasuk, jamPulang: rec.jamPulang, fotoMasukId: rec.fotoMasukId, fotoPulangId: rec.fotoPulangId, lokasi: rec.lokasi, jarak: rec.jarak, catatan: rec.catatan, curiga: rec.curiga });
+  if (rec) return Object.assign(base, { mode: rec.mode || '', status: rec.status || 'Hadir', jamMasuk: rec.jamMasuk, jamPulang: rec.jamPulang, fotoMasukId: rec.fotoMasukId, fotoPulangId: rec.fotoPulangId, lokasi: rec.lokasi, jarak: rec.jarak, catatan: rec.catatan, curiga: rec.curiga });
   const list = ctx.izin[u.userId] || [];
   for (let i = 0; i < list.length; i++) if (list[i].mulai <= date && list[i].selesai >= date) { base.status = list[i].jenis; base.catatan = list[i].alasan; return base; }
   if (!isSchool(date, ctx.j)) { base.status = 'Libur'; return base; }
@@ -453,10 +501,7 @@ function aksiSiswa(j, rec, iz, n, abaikan) {
       if (m < j.bukaMasukM) a.pesan = 'Absen masuk dibuka pukul ' + j.jamBukaMasuk + ' WIB.';
       else { a.boleh = true; a.pesan = m > j.masukM ? 'Anda akan tercatat Terlambat (batas ' + j.jamMasuk + ' WIB).' : ''; }
     } else {
-      a.tipe = 'pulang';
-      if (m < j.pulangM) a.pesan = 'Absen masuk sudah ditutup. Absen pulang dibuka pukul ' + j.jamPulang + ' WIB dan tetap bisa Anda lakukan.';
-      else if (m > j.tutupPulangM) a.pesan = 'Absen masuk dan pulang sudah ditutup. Hubungi wali kelas.';
-      else { a.boleh = true; a.pesan = 'Anda belum absen masuk. Absen pulang tetap dicatat dengan status Alpha (tanpa jam masuk).'; }
+      a.pesan = 'Anda tidak absen masuk sampai batas pukul ' + j.jamTutupMasuk + ' WIB, sehingga tercatat Alpha hari ini dan absen pulang tidak dapat dilakukan. Jika ada kekeliruan, hubungi wali kelas.';
     }
   } else {
     a.tipe = 'pulang';
@@ -481,15 +526,15 @@ function cekSubmit(tipe, j, rec, iz, n, lok, abaikan) {
     if (rec && rec.jamPulang) throw new Error('Anda sudah absen pulang hari ini pukul ' + hm(rec.jamPulang) + '.');
     if (!abaikan && m < j.pulangM) throw new Error('Absen pulang dibuka pukul ' + j.jamPulang + ' WIB.');
     if (!abaikan && m > j.tutupPulangM) throw new Error('Absen pulang sudah ditutup pukul ' + j.jamTutupPulang + ' WIB.');
-    if (!abaikan && (!rec || !rec.jamMasuk) && m <= j.tutupMasukM) throw new Error('Lakukan absen masuk terlebih dahulu.');
+    if (!abaikan && (!rec || !rec.jamMasuk)) throw new Error(m <= j.tutupMasukM ? 'Lakukan absen masuk terlebih dahulu.' : 'Anda tidak absen masuk sehingga tercatat Alpha. Absen pulang tidak dapat dilakukan. Hubungi wali kelas.');
   }
   const L = j.lokasi; let jarak = null;
-  if (L.wajib) {
+  if (lokasiWajib(j)) {
     if (!lok || lok.lat == null) throw new Error('Lokasi belum terdeteksi. Aktifkan GPS dan izinkan akses lokasi.');
     if (lok.akurasi > L.maxAkurasi) throw new Error('Akurasi GPS rendah (±' + Math.round(lok.akurasi) + ' m, maksimal ' + L.maxAkurasi + ' m). Pindah ke area terbuka lalu coba lagi.');
     jarak = haversine(lok.lat, lok.lng, L.lat, L.lng);
     if (jarak > L.radius) throw new Error('Anda berada ' + Math.round(jarak) + ' m dari sekolah (radius ' + L.radius + ' m). Absen hanya dapat dilakukan di area sekolah.');
-  } else if (lok && lok.lat != null) jarak = haversine(lok.lat, lok.lng, L.lat, L.lng);
+  } else if (!isPJJ(j) && lok && lok.lat != null) jarak = haversine(lok.lat, lok.lng, L.lat, L.lng);
   return { jarak: jarak == null ? null : Math.round(jarak) };
 }
 
@@ -743,13 +788,10 @@ const MockDB = (() => {
       const loks = lok ? lok.lat + ',' + lok.lng : '', cur = lok ? curigaLokasi(lok) : '';
       if (p.tipe === 'masuk') {
         const status = n.min <= jadwal.masukM ? 'Hadir' : 'Terlambat';
-        absensi.push({ id, userId: u.userId, nis: u.userId, nama: u.nama, kelasId: u.kelasId, tanggal: n.tanggal, status, jamMasuk: n.jam, jamPulang: '', fotoMasukId: fid, fotoPulangId: '', lokasi: loks, jarak: cek.jarak, catatan: '', sumber: 'Selfie', curiga: cur });
+        absensi.push({ id, userId: u.userId, nis: u.userId, nama: u.nama, kelasId: u.kelasId, tanggal: n.tanggal, status, jamMasuk: n.jam, jamPulang: '', fotoMasukId: fid, fotoPulangId: '', lokasi: loks, jarak: cek.jarak, catatan: '', sumber: 'Selfie', curiga: cur, mode: jadwal.modeAbsen });
         return { tipe: 'masuk', status, jam: n.jam, tanggal: n.tanggal, jarak: cek.jarak, pesan: status === 'Hadir' ? 'Absen masuk berhasil. Selamat belajar!' : 'Absen masuk tercatat Terlambat.' };
       }
-      if (!rec) {
-        absensi.push({ id, userId: u.userId, nis: u.userId, nama: u.nama, kelasId: u.kelasId, tanggal: n.tanggal, status: 'Alpha', jamMasuk: '', jamPulang: n.jam, fotoMasukId: '', fotoPulangId: fid, lokasi: loks, jarak: cek.jarak, catatan: 'Tidak absen masuk; hanya absen pulang', sumber: 'Selfie', curiga: cur });
-        return { tipe: 'pulang', status: 'Alpha', jam: n.jam, tanggal: n.tanggal, jarak: cek.jarak, pesan: 'Absen pulang tercatat. Karena belum absen masuk, status hari ini Alpha.' };
-      }
+      if (!rec || !rec.jamMasuk) throw new Error('Anda tidak absen masuk sehingga tercatat Alpha. Absen pulang tidak dapat dilakukan. Hubungi wali kelas.');
       Object.assign(rec, { jamPulang: n.jam, fotoPulangId: fid });
       return { tipe: 'pulang', status: rec.status, jam: n.jam, tanggal: n.tanggal, jarak: cek.jarak, pesan: 'Absen pulang berhasil. Hati-hati di jalan!' };
     },
@@ -788,7 +830,7 @@ async function buildFireDB() {
     return { id, userId: d.userId, nis: d.nis, nama: d.nama, kelasId: d.kelasId, tanggal: d.tanggal, status: d.status || 'Hadir', sumber: d.sumber || '',
       jamMasuk: wm ? wibParts(wm).jam : '', jamPulang: wp ? wibParts(wp).jam : '', fotoMasukId: wm ? id + '_masuk' : '', fotoPulangId: wp ? id + '_pulang' : '',
       lokasi: d.latMasuk != null ? d.latMasuk + ',' + d.lngMasuk : (d.latPulang != null ? d.latPulang + ',' + d.lngPulang : ''),
-      jarak: d.jarakMasuk != null ? d.jarakMasuk : (d.jarakPulang != null ? d.jarakPulang : ''), catatan: d.catatan || '', curiga: d.curigaMasuk || d.curigaPulang || '' };
+      jarak: d.jarakMasuk != null ? d.jarakMasuk : (d.jarakPulang != null ? d.jarakPulang : ''), catatan: d.catatan || '', curiga: d.curigaMasuk || d.curigaPulang || '', mode: d.mode || 'sekolah' };
   };
   const izinFromDoc = d => ({ izinId: d.id, userId: d.userId, nis: d.nis, nama: d.nama, kelasId: d.kelasId, mulai: d.mulai, selesai: d.selesai, jenis: d.jenis, alasan: d.alasan, status: d.status, catatan: d.catatan || '', lampiranId: d.adaLampiran ? d.id : '', createdAt: ms(d.createdAt) });
   const absQ = (...c) => rows(query(C('absensi'), ...c)).then(r => r.map(recFromDoc));
@@ -1028,15 +1070,12 @@ async function buildFireDB() {
         let hasil;
         if (p.tipe === 'masuk') {
           const status = n.min <= j.masukM ? 'Hadir' : 'Terlambat';
-          const d = { userId: u.userId, nis: u.userId, nama: u.nama, kelasId: u.kelasId, tanggal: n.tanggal, bulan: n.bulan, status, sumber: 'Selfie', catatan: '', perangkat: String(p.perangkat || '').slice(0, 140), waktuMasuk: serverTimestamp(), skorMasuk: p.skor, updatedAt: serverTimestamp() };
+          const d = { userId: u.userId, nis: u.userId, nama: u.nama, kelasId: u.kelasId, tanggal: n.tanggal, bulan: n.bulan, status, sumber: 'Selfie', catatan: '', perangkat: String(p.perangkat || '').slice(0, 140), waktuMasuk: serverTimestamp(), skorMasuk: p.skor, mode: j.modeAbsen, updatedAt: serverTimestamp() };
           if (geo) Object.assign(d, { latMasuk: geo.lat, lngMasuk: geo.lng, jarakMasuk: geo.jarak, akurasiMasuk: geo.akurasi, curigaMasuk: cur });
           b.set(ref, d); b.set(D('fotoAbsen', id + '_masuk'), foto);
           hasil = { tipe: 'masuk', status, jam: n.jam, tanggal: n.tanggal, jarak: cek.jarak, pesan: status === 'Hadir' ? 'Absen masuk berhasil. Selamat belajar!' : 'Absen masuk tercatat Terlambat.' };
-        } else if (!rec) {
-          const d = { userId: u.userId, nis: u.userId, nama: u.nama, kelasId: u.kelasId, tanggal: n.tanggal, bulan: n.bulan, status: 'Alpha', sumber: 'Selfie', catatan: 'Tidak absen masuk; hanya absen pulang', perangkat: String(p.perangkat || '').slice(0, 140), waktuPulang: serverTimestamp(), skorPulang: p.skor, updatedAt: serverTimestamp() };
-          if (geo) Object.assign(d, { latPulang: geo.lat, lngPulang: geo.lng, jarakPulang: geo.jarak, akurasiPulang: geo.akurasi, curigaPulang: cur });
-          b.set(ref, d); b.set(D('fotoAbsen', id + '_pulang'), foto);
-          hasil = { tipe: 'pulang', status: 'Alpha', jam: n.jam, tanggal: n.tanggal, jarak: cek.jarak, pesan: 'Absen pulang tercatat. Karena belum absen masuk, status hari ini Alpha.' };
+        } else if (!rec || !rec.jamMasuk) {
+          throw new Error('Anda tidak absen masuk sehingga tercatat Alpha. Absen pulang tidak dapat dilakukan. Hubungi wali kelas.');
         } else {
           const d = { waktuPulang: serverTimestamp(), skorPulang: p.skor, updatedAt: serverTimestamp() };
           if (geo) Object.assign(d, { latPulang: geo.lat, lngPulang: geo.lng, jarakPulang: geo.jarak, akurasiPulang: geo.akurasi, curigaPulang: cur });
@@ -1285,13 +1324,74 @@ async function showFoto(id, title) {
 const fotoBtn = (id, title) => id ? '<button class="photo-btn" data-act="foto" data-id="' + esc(id) + '" data-title="' + esc(title) + '">' + ic('image', 'sm') + ' Foto</button>' : '';
 const flagHtml = c => c ? '<span class="flag" title="' + esc(c) + '">' + ic('alert', 'sm') + ' Periksa lokasi</span>' : '';
 
+
+/* ============================ MOTIVASI & KALENDER ============================ */
+const QUOTES = [
+  ['Pendidikan adalah senjata paling ampuh yang bisa kamu gunakan untuk mengubah dunia.', 'Nelson Mandela'],
+  ['Akar pendidikan itu pahit, tetapi buahnya manis.', 'Aristoteles'],
+  ['Setiap orang menjadi guru, setiap rumah menjadi sekolah.', 'Ki Hajar Dewantara'],
+  ['Pendidikan adalah paspor menuju masa depan, karena hari esok adalah milik mereka yang mempersiapkannya hari ini.', 'Malcolm X'],
+  ['Tidak penting seberapa lambat kamu melangkah, asalkan kamu tidak berhenti.', 'Konfusius'],
+  ['Investasi terbaik adalah investasi pada ilmu pengetahuan.', 'Benjamin Franklin'],
+  ['Belajar hari ini adalah bekal untuk meraih cita-cita esok hari.', ''],
+  ['Disiplin kecil yang dilakukan setiap hari akan menumbuhkan prestasi besar.', ''],
+  ['Hadir tepat waktu adalah langkah pertama menuju keberhasilan belajar.', ''],
+  ['Kesalahan adalah bukti bahwa kamu sedang belajar. Jangan takut mencoba.', ''],
+  ['Ilmu tidak datang kepada yang menunggu, tetapi kepada yang mencarinya.', ''],
+  ['Mulailah dari apa yang kamu bisa, lanjutkan dengan apa yang kamu mau.', ''],
+  ['Satu halaman yang dibaca hari ini lebih berharga daripada seribu niat yang ditunda.', ''],
+  ['Sekolah mengajarkan pelajaran, kehidupan mengajarkan makna. Ambil keduanya.', ''],
+  ['Semangat belajar yang tumbuh hari ini akan menjadi kebanggaan keluargamu kelak.', ''],
+  ['Jangan bandingkan prosesmu dengan hasil orang lain. Fokuslah menjadi lebih baik dari kemarin.', ''],
+  ['Rajin pangkal pandai, hemat pangkal kaya.', 'Peribahasa'],
+  ['Tuntutlah ilmu, karena ilmu membuka banyak pintu kesempatan.', ''],
+  ['Kerja keras mengalahkan bakat ketika bakat tidak bekerja keras.', ''],
+  ['Setiap pagi di sekolah adalah kesempatan baru untuk menjadi versi terbaik dirimu.', ''],
+  ['Guru membukakan pintu, tetapi kamu sendiri yang harus melangkah masuk.', ''],
+  ['Mimpi besar membutuhkan kebiasaan kecil yang konsisten.', ''],
+  ['Bertanya bukan tanda bodoh, melainkan tanda ingin tahu.', ''],
+  ['Hari ini adalah halaman baru. Tulislah dengan semangat belajar.', ''],
+  ['Kegagalan adalah guru yang sabar bagi mereka yang mau belajar.', ''],
+  ['Bangga pada proses, sabar pada hasil.', ''],
+  ['Kejujuran dan ketekunan adalah dua sayap untuk meraih cita-cita.', ''],
+  ['Belajar tidak pernah melelahkan jika dilakukan dengan hati yang gembira.', ''],
+  ['Masa depan dibangun dari kehadiran, perhatian, dan usaha hari ini.', ''],
+  ['Jadilah pelajar yang tidak hanya pintar, tetapi juga berakhlak dan bermanfaat.', '']
+];
+let lastQuote = -1;
+function pickQuote() {
+  let i; do { i = Math.floor(Math.random() * QUOTES.length); } while (i === lastQuote && QUOTES.length > 1);
+  lastQuote = i; return QUOTES[i];
+}
+const KAL_HARI = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+const kalKelas = st => (st === 'Hadir' || st === 'Terlambat') ? 'g' : st === 'Alpha' ? 'r' : (st === 'Izin' || st === 'Sakit') ? 'y' : 'n';
+function kalenderHtml(ctx, u, bulan, tglIni, bulanIni) {
+  const [y, m] = bulan.split('-').map(Number), jmlHari = new Date(Date.UTC(y, m, 0)).getUTCDate();
+  const awal = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7, data = {}; let cells = '';
+  for (let i = 0; i < awal; i++) cells += '<span class="cal-d e"></span>';
+  for (let d = 1; d <= jmlHari; d++) {
+    const t = bulan + '-' + pad(d), x = dayOf(ctx, u, t), k = kalKelas(x.status);
+    data[t] = { status: x.status, jamMasuk: x.jamMasuk ? hm(x.jamMasuk) : '', jamPulang: x.jamPulang ? hm(x.jamPulang) : '', catatan: x.catatan || '', mode: x.mode };
+    cells += '<button type="button" class="cal-d ' + k + (t === tglIni ? ' today' : '') + '" data-act="kalDay" data-d="' + t + '" aria-label="' + esc(fmtPendek(t) + ': ' + (x.status || 'Tidak ada data')) + '">' + d + '</button>';
+  }
+  S.cache.kal = data;
+  const batasAwal = shiftBulan(bulanIni, -6), prevOk = bulan > batasAwal, nextOk = bulan < bulanIni;
+  return '<div class="card stack"><div class="row between"><h3>Kalender Kehadiran</h3></div>' +
+    '<div class="row between cal-h"><button class="btn sm ghost" data-act="kalGeser" data-d="-1" aria-label="Bulan sebelumnya"' + (prevOk ? '' : ' disabled') + '>&#8249;</button><b>' + esc(fmtBulan(bulan)) + '</b><button class="btn sm ghost" data-act="kalGeser" data-d="1" aria-label="Bulan berikutnya"' + (nextOk ? '' : ' disabled') + '>&#8250;</button></div>' +
+    '<div class="cal"><div class="cal-g">' + KAL_HARI.map(h => '<span class="cal-w">' + h + '</span>').join('') + cells + '</div></div>' +
+    '<div class="cal-leg"><span><i class="g"></i>Hadir</span><span><i class="y"></i>Sakit / Izin</span><span><i class="r"></i>Alpha</span><span><i class="n"></i>Lainnya</span></div>' +
+    '<div class="cal-detail" id="kalDetail" aria-live="polite">Ketuk tanggal untuk melihat detail.</div></div>';
+}
+
 /* ============================ SISWA ============================ */
 VIEWS.beranda = async () => {
   const j = await ensureJadwal(false);
   if (!j) return { html: pageHead('Beranda') + '<div class="card"><div class="notice warn">' + ic('info') + '<div>Jadwal dan lokasi sekolah belum diatur oleh admin. Absensi belum dapat dilakukan.</div></div></div>' };
   const n = wibParts(nowTs()), u = S.user;
-  const [recs, izs] = await Promise.all([api('absUserMonth', u.userId, n.bulan), api('izinSaya')]);
-  const ctx = makeCtx(j, recs, izs), rec = ctx.abs[u.userId + '|' + n.tanggal];
+  const kp = S.params.kal, bulanKal = kp && /^\d{4}-\d{2}$/.test(kp) && kp <= n.bulan && kp >= shiftBulan(n.bulan, -6) ? kp : n.bulan;
+  const [recs, izs, recsK] = await Promise.all([api('absUserMonth', u.userId, n.bulan), api('izinSaya'), bulanKal === n.bulan ? null : api('absUserMonth', u.userId, bulanKal)]);
+  const ctx = makeCtx(j, recs, izs), ctxK = bulanKal === n.bulan ? ctx : makeCtx(j, recsK, izs), rec = ctx.abs[u.userId + '|' + n.tanggal];
+  if (!(kp && S.quote)) S.quote = pickQuote();
   const iz = (ctx.izin[u.userId] || []).find(i => i.mulai <= n.tanggal && i.selesai >= n.tanggal);
   const aksi = aksiSiswa(j, rec, iz, n, IS_PREVIEW && S.pv.jam), hari = dayOf(ctx, u, n.tanggal);
   const rekap = count(datesBetween(n.bulan + '-01', n.tanggal).map(d => dayOf(ctx, u, d)));
@@ -1302,14 +1402,16 @@ VIEWS.beranda = async () => {
   const row = (lbl, sub, jam, st, foto) => '<div class="item"><div class="dot-av">' + ic('clock', 'sm') + '</div><div class="grow"><div class="ttl">' + lbl + '</div><div class="sub">' + sub + '</div></div><div style="text-align:right;display:flex;flex-direction:column;gap:4px;align-items:flex-end"><div class="bold tnum">' + jam + '</div>' + st + foto + '</div></div>';
   const html = '<div class="hero"><div class="hi"><div class="avatar lg">' + avatarInner(u.nama, S.avatar) + '</div><div><div class="small" style="opacity:.92;font-weight:500">Halo,</div><div style="font-weight:700;font-size:18px;line-height:1.2">' + esc(first) + '</div><div class="xs" style="opacity:.9">' + esc(u.kelasNama || '') + ' · NIS ' + esc(u.username) + '</div></div></div>' +
     '<div class="clock tnum" id="clock">--:--:--</div><div class="date">' + esc(fmtTgl(n.tanggal)) + '</div>' +
-    '<div class="chips"><span class="chip">Masuk ' + esc(j.jamMasuk) + ' WIB</span><span class="chip">Pulang ' + esc(j.jamPulang) + ' WIB</span><span class="chip">' + (IS_PREVIEW ? 'Jam preview' : 'Jam server') + '</span><span class="chip">Radius ' + j.lokasi.radius + ' m</span></div></div>' +
-    clockNotice() + '<div data-install></div>' +
+    '<div class="chips"><span class="chip">Masuk ' + esc(j.jamMasuk) + ' WIB</span><span class="chip">Pulang ' + esc(j.jamPulang) + ' WIB</span><span class="chip">' + (IS_PREVIEW ? 'Jam preview' : 'Jam server') + '</span><span class="chip">' + esc(modeInfo(j).singkat) + '</span></div>' +
+    '<div class="quote">&ldquo;' + esc(S.quote[0]) + '&rdquo;' + (S.quote[1] ? ' <small>&mdash; ' + esc(S.quote[1]) + '</small>' : '') + '</div></div>' +
+    modeBanner(j) + clockNotice() + '<div data-install></div>' +
     '<div class="card stack s8">' + cta + '</div>' +
     '<div class="card"><h3>Absensi hari ini</h3><div class="list">' +
     row('Masuk', a && !a.jamMasuk ? 'Tidak absen masuk' : 'Tepat waktu s.d. ' + esc(j.jamMasuk), a && a.jamMasuk ? hm(a.jamMasuk) : '--:--', a && a.jamMasuk ? pill(a.status) : pill(a ? 'Alpha' : (iz ? iz.jenis : 'Belum')), a && a.jamMasuk ? fotoBtn(a.fotoMasukId, 'Foto absen masuk') : '') +
     row('Pulang', 'Mulai pukul ' + esc(j.jamPulang), a && a.jamPulang ? hm(a.jamPulang) : '--:--', a && a.jamPulang ? pill('Hadir') : pill('Belum'), a ? fotoBtn(a.fotoPulangId, 'Foto absen pulang') : '') + '</div></div>' +
     (menunggu ? '<div class="notice">' + ic('file') + '<div>' + menunggu + ' pengajuan izin menunggu keputusan.</div></div>' : '') +
-    '<div class="card stack"><div class="row between"><h3>Rekap bulan ini</h3><span class="small bold tnum">' + rekap.persen + '% hadir</span></div>' + tilesHtml(rekap) + '<div class="bar" aria-hidden="true"><i style="width:' + Math.min(100, rekap.persen) + '%"></i></div></div>';
+    '<div class="card stack"><div class="row between"><h3>Rekap bulan ini</h3><span class="small bold tnum">' + rekap.persen + '% hadir</span></div>' + tilesHtml(rekap) + '<div class="bar" aria-hidden="true"><i style="width:' + Math.min(100, rekap.persen) + '%"></i></div></div>' +
+    kalenderHtml(ctxK, u, bulanKal, n.tanggal, n.bulan);
   return { html, after: () => { const tick = () => { const el = $('#clock'); if (el) el.textContent = wibParts(nowTs()).jam; }; tick(); S.timers.push(setInterval(tick, 1000)); } };
 };
 
@@ -1319,15 +1421,15 @@ VIEWS.absen = async () => {
   const ctx = makeCtx(j, recs, izs), rec = ctx.abs[u.userId + '|' + n.tanggal];
   const iz = (ctx.izin[u.userId] || []).find(i => i.mulai <= n.tanggal && i.selesai >= n.tanggal);
   const aksi = aksiSiswa(j, rec, iz, n, IS_PREVIEW && S.pv.jam);
-  const pvBox = IS_PREVIEW ? '<div class="card flat stack s8" style="border-style:dashed"><div class="bold small">Panel Preview (hanya muncul di mode uji coba)</div><div class="grid2"><label class="f" for="pvLok">Posisi GPS simulasi<select class="inp" id="pvLok"><option value="sekolah"' + (S.pv.lokasi === 'sekolah' ? ' selected' : '') + '>Di area sekolah</option><option value="luar"' + (S.pv.lokasi === 'luar' ? ' selected' : '') + '>Di luar area sekolah</option><option value="real"' + (S.pv.lokasi === 'real' ? ' selected' : '') + '>GPS perangkat asli</option></select></label><label class="switch" for="pvJam" style="align-self:end;min-height:46px"><input type="checkbox" id="pvJam"' + (S.pv.jam ? ' checked' : '') + '>Abaikan batas jam absen</label></div></div>' : '';
+  const pvBox = IS_PREVIEW && !isPJJ(j) ? '<div class="card flat stack s8" style="border-style:dashed"><div class="bold small">Panel Preview (hanya muncul di mode uji coba)</div><div class="grid2"><label class="f" for="pvLok">Posisi GPS simulasi<select class="inp" id="pvLok"><option value="sekolah"' + (S.pv.lokasi === 'sekolah' ? ' selected' : '') + '>Di area sekolah</option><option value="luar"' + (S.pv.lokasi === 'luar' ? ' selected' : '') + '>Di luar area sekolah</option><option value="real"' + (S.pv.lokasi === 'real' ? ' selected' : '') + '>GPS perangkat asli</option></select></label><label class="switch" for="pvJam" style="align-self:end;min-height:46px"><input type="checkbox" id="pvJam"' + (S.pv.jam ? ' checked' : '') + '>Abaikan batas jam absen</label></div></div>' : '';
   if (!aksi.tipe || !aksi.boleh) return { html: pageHead('Absen Selfie') + '<div class="card stack"><div class="notice ' + (rec && rec.jamPulang ? 'ok' : 'warn') + '">' + ic('info') + '<div>' + esc(aksi.pesan || 'Absen belum dapat dilakukan.') + '</div></div><button class="btn soft" data-act="nav" data-route="beranda">Kembali ke Beranda</button></div>' + pvBox, after: () => initPv() };
   const tipe = aksi.tipe, label = tipe === 'masuk' ? 'Masuk' : 'Pulang';
-  const html = pageHead('Absen ' + label, 'Wajah dan lokasi harus valid. Waktu dicatat oleh server.') + clockNotice() + pvBox +
+  const html = pageHead('Absen ' + label, isPJJ(j) ? 'Mode PJJ: cukup wajah yang valid, lokasi tidak diperlukan. Waktu dicatat oleh server.' : 'Wajah dan lokasi harus valid. Waktu dicatat oleh server.') + modeBanner(j) + clockNotice() + pvBox +
     '<div class="card stack" id="absenCard"><div id="locBox" class="locbox">' + ic('target') + '<div><div class="ttl">Mencari lokasi...</div><div class="sub">Izinkan akses lokasi pada peramban.</div></div></div>' +
     '<div class="cam-wrap" id="camWrap"><video id="camVideo" autoplay playsinline muted hidden></video><img id="camShot" alt="Hasil foto" hidden>' +
     '<div class="cam-ph" id="camPh"><div>' + ic('camera', 'lg') + '<div>Tekan <b>Buka Kamera</b> untuk memulai</div></div></div><div class="cam-guide" id="camGuide" hidden></div><div class="cam-status" id="camStatus" hidden></div></div>' +
     '<div class="row wrap" id="camBtns" style="justify-content:center"></div>' +
-    '<div class="stack s8"><div class="step"><b>1</b><div>Berada di area sekolah (radius ' + j.lokasi.radius + ' m) dan aktifkan GPS.</div></div><div class="step"><b>2</b><div>Wajah menghadap kamera di tempat terang, tanpa masker atau kacamata gelap.</div></div><div class="step"><b>3</b><div>Tombol ambil foto aktif saat wajah dan lokasi sama-sama valid. Foto hanya dari kamera langsung.</div></div></div></div>';
+    '<div class="stack s8"><div class="step"><b>1</b><div>' + (isPJJ(j) ? 'Absen dari rumah. Pastikan koneksi internet stabil.' : 'Berada di area sekolah (radius ' + j.lokasi.radius + ' m) dan aktifkan GPS.') + '</div></div><div class="step"><b>2</b><div>Wajah menghadap kamera di tempat terang, tanpa masker atau kacamata gelap.</div></div><div class="step"><b>3</b><div>Tombol ambil foto aktif saat wajah dan lokasi sama-sama valid. Foto hanya dari kamera langsung.</div></div></div></div>';
   return { html, after: () => { initPv(); initAbsen(tipe, j, n); } };
 };
 function initPv() {
@@ -1338,15 +1440,16 @@ function initPv() {
 
 function initAbsen(tipe, j, n0) {
   const A = { tipe, foto: null, skor: null, fix: null, geoErr: '', mode: 'idle', busy: false, faceOk: false };
-  const L = j.lokasi, label = tipe === 'masuk' ? 'MASUK' : 'PULANG';
+  const L = j.lokasi, label = tipe === 'masuk' ? 'MASUK' : 'PULANG', pjj = isPJJ(j), wajib = lokasiWajib(j);
   const wrap = $('#camWrap'), video = $('#camVideo'), shot = $('#camShot'), ph = $('#camPh'), guide = $('#camGuide'), status = $('#camStatus');
   const setStatus = (t, ok) => { status.hidden = !t; status.textContent = t || ''; wrap.classList.toggle('ok', !!ok); };
   const locEval = () => {
-    if (A.geoErr) return { ok: !L.wajib, cls: 'bad', t: 'Lokasi belum tersedia', s: A.geoErr };
+    if (pjj) return { ok: true, cls: 'ok', t: 'Absen PJJ (dari rumah)', s: 'Lokasi tidak diperlukan. Cukup foto selfie yang jelas.' };
+    if (A.geoErr) return { ok: !wajib, cls: 'bad', t: 'Lokasi belum tersedia', s: A.geoErr };
     if (!A.fix) return { ok: false, cls: '', t: 'Mencari lokasi...', s: 'Tunggu sinyal GPS. Izinkan akses lokasi jika diminta.' };
     const d = Math.round(haversine(A.fix.lat, A.fix.lng, L.lat, L.lng)), akOk = A.fix.akurasi <= L.maxAkurasi, inside = d <= L.radius;
-    if (!akOk) return { ok: !L.wajib, cls: 'bad', t: 'Akurasi GPS rendah (±' + A.fix.akurasi + ' m)', s: 'Maksimal ±' + L.maxAkurasi + ' m. Pindah ke area terbuka.', d };
-    if (!inside) return { ok: !L.wajib, cls: 'bad', t: 'Di luar area sekolah', s: 'Jarak ±' + d + ' m dari sekolah (radius ' + L.radius + ' m).', d };
+    if (!akOk) return { ok: !wajib, cls: 'bad', t: 'Akurasi GPS rendah (±' + A.fix.akurasi + ' m)', s: 'Maksimal ±' + L.maxAkurasi + ' m. Pindah ke area terbuka.', d };
+    if (!inside) return { ok: !wajib, cls: 'bad', t: 'Di luar area sekolah', s: 'Jarak ±' + d + ' m dari sekolah (radius ' + L.radius + ' m).', d };
     return { ok: true, cls: 'ok', t: 'Di area sekolah', s: 'Jarak ±' + d + ' m · akurasi ±' + A.fix.akurasi + ' m', d };
   };
   const paintLoc = () => {
@@ -1379,7 +1482,8 @@ function initAbsen(tipe, j, n0) {
   }
   function lines() {
     const w = wibParts(nowTs()), e = locEval(), l = [L.lat != null ? 'ABSEN ' + label + '  -  ' + S.pub.namaSekolah.toUpperCase() : '', S.user.nama + '  -  ' + S.user.username, fmtPendek(w.tanggal) + '  ' + w.jam.slice(0, 5) + ' WIB (jam server)'];
-    if (A.fix) l.push('GPS ' + A.fix.lat + ', ' + A.fix.lng + (e.d != null ? '  -  ' + e.d + ' m dari sekolah' : ''));
+    if (pjj) l.push('Mode PJJ (absen dari rumah)');
+    else if (A.fix) l.push('GPS ' + A.fix.lat + ', ' + A.fix.lng + (e.d != null ? '  -  ' + e.d + ' m dari sekolah' : ''));
     return l;
   }
   async function shoot() {
@@ -1396,9 +1500,9 @@ function initAbsen(tipe, j, n0) {
   }
   async function send() {
     if (!A.foto || A.busy) return;
-    let fix = A.fix;
-    if (!fix || Date.now() - fix.ts > 60000) { const r = await Geo.once(); if (r.fix) { fix = A.fix = r.fix; paintLoc(); } else if (L.wajib) return toast(r.err || 'Lokasi belum tersedia.', 'bad'); }
-    const payload = { tipe: A.tipe, foto: A.foto, skor: A.skor || 0, lokasi: fix ? { lat: fix.lat, lng: fix.lng, akurasi: fix.akurasi } : null, perangkat: (navigator.userAgent || '').slice(0, 140) };
+    let fix = pjj ? null : A.fix;
+    if (!pjj && (!fix || Date.now() - fix.ts > 60000)) { const r = await Geo.once(); if (r.fix) { fix = A.fix = r.fix; paintLoc(); } else if (wajib) return toast(r.err || 'Lokasi belum tersedia.', 'bad'); }
+    const payload = { tipe: A.tipe, foto: A.foto, skor: A.skor || 0, lokasi: !pjj && fix ? { lat: fix.lat, lng: fix.lng, akurasi: fix.akurasi } : null, perangkat: (navigator.userAgent || '').slice(0, 140) };
     A.busy = true;
     const res = await run(() => api('submitAbsen', payload));
     A.busy = false;
@@ -1406,7 +1510,7 @@ function initAbsen(tipe, j, n0) {
     $('#absenCard').innerHTML = '<div class="success"><div class="big">' + ic('check') + '</div><h2 style="font-size:20px;font-weight:700">Absen ' + (res.tipe === 'masuk' ? 'Masuk' : 'Pulang') + ' Berhasil</h2><p class="muted" style="margin:6px 0 10px">' + esc(res.pesan) + '</p><div class="row" style="justify-content:center;gap:10px">' + pill(res.status) + '<b class="tnum">' + esc(hm(res.jam)) + ' WIB</b></div>' + (res.jarak != null ? '<p class="xs muted" style="margin-top:8px">Jarak dari sekolah ±' + res.jarak + ' m</p>' : '') + '</div><button class="btn block" data-act="nav" data-route="beranda">Kembali ke Beranda</button>';
   }
   paint(); paintLoc();
-  Geo.watch(r => { if (r.fix) { A.fix = r.fix; A.geoErr = ''; } else if (r.err) { A.geoErr = r.err; } paintLoc(); });
+  if (!pjj) Geo.watch(r => { if (r.fix) { A.fix = r.fix; A.geoErr = ''; } else if (r.err) { A.geoErr = r.err; } paintLoc(); });
 }
 
 VIEWS.izin = async () => {
@@ -1513,12 +1617,12 @@ VIEWS.w_dash = async () => {
   const list = all.filter(s => filter === 'Semua' || s.status === filter), filters = ['Semua', 'Hadir', 'Terlambat', 'Izin', 'Sakit', 'Alpha', 'Belum'];
   S.cache.harian = { rows: all, namaKelas, tanggal: tgl };
   const html = pageHead('Kehadiran ' + namaKelas, fmtTgl(tgl), '<div class="row wrap"><button class="btn sm ghost" data-act="tglGeser" data-d="-1" aria-label="Hari sebelumnya">&#8249;</button><input class="inp" style="width:auto;min-height:36px;padding:4px 14px" type="date" id="tglPick" value="' + tgl + '" aria-label="Pilih tanggal"><button class="btn sm ghost" data-act="tglGeser" data-d="1" aria-label="Hari berikutnya">&#8250;</button></div>') +
-    kelasTabsHtml(kt.ks, kt.id, 'pilihKelas') + (isSchool(tgl, j) ? '' : '<div class="notice warn">' + ic('info') + '<div>Tanggal ini bukan hari sekolah.</div></div>') +
+    kelasTabsHtml(kt.ks, kt.id, 'pilihKelas') + modeBanner(j) + (isSchool(tgl, j) ? '' : '<div class="notice warn">' + ic('info') + '<div>Tanggal ini bukan hari sekolah.</div></div>') +
     '<div class="tiles">' + ['Hadir', 'Terlambat', 'Izin', 'Sakit', 'Alpha', 'Belum'].map(k => '<div class="tile t-' + k + '"><b class="tnum">' + r[k] + '</b><span>' + k + '</span></div>').join('') + '</div>' +
     '<div class="tabs">' + filters.map(f => '<button class="' + (f === filter ? 'on' : '') + '" data-act="filter" data-v="' + f + '">' + f + '</button>').join('') + '</div>' +
     '<div class="card">' + (list.length ? '<div class="list">' + list.map(s => '<div class="item" style="align-items:flex-start"><div class="dot-av">' + esc(initials(s.nama)) + '</div><div class="grow"><div class="ttl">' + esc(s.nama) + '</div><div class="sub tnum">NIS ' + esc(s.nis) + ' · Masuk ' + esc(hm(s.jamMasuk)) + ' · Pulang ' + esc(hm(s.jamPulang)) + (s.jarak !== '' && s.jarak != null ? ' · ±' + s.jarak + ' m' : '') + '</div>' + (s.catatan ? '<div class="sub">' + esc(s.catatan) + '</div>' : '') +
       '<div class="row wrap" style="margin-top:6px">' + fotoBtn(s.fotoMasukId, 'Foto masuk - ' + s.nama) + fotoBtn(s.fotoPulangId, 'Foto pulang - ' + s.nama) + flagHtml(s.curiga) + '<button class="photo-btn" data-act="koreksi" data-u="' + esc(s.userId) + '" data-n="' + esc(s.nama) + '" data-s="' + esc(s.status) + '">' + ic('edit', 'sm') + ' Koreksi</button></div></div>' + pill(s.status) + '</div>').join('') + '</div>' : emptyBox('Tidak ada siswa pada filter ini.', 'users')) + '</div>' +
-    '<div><button class="btn sm ghost" data-act="csvHarian">' + ic('download', 'sm') + ' Unduh CSV hari ini</button></div>';
+    '<div class="row wrap"><button class="btn sm ghost" data-act="csvHarian">' + ic('download', 'sm') + ' Unduh CSV hari ini</button><button class="btn sm ghost" data-act="pdfWaliHarian">' + ic('file', 'sm') + ' Cetak PDF tidak hadir</button></div>';
   return { html, after: () => { $('#tglPick').onchange = e => { if (e.target.value) go('w_dash', Object.assign({}, S.params, { tanggal: e.target.value })); }; } };
 };
 
@@ -1549,11 +1653,11 @@ VIEWS.w_rekap = async () => {
   const ctx = makeCtx(j, recs, izs), ds = a <= t ? datesBetween(a, b) : [], namaKelas = (kt.ks.find(k => k.kelasId === kt.id) || {}).namaKelas || '';
   let hari = 0;
   const rows = siswa.map(s => { const c = count(ds.map(d => dayOf(ctx, s, d))); if (c.hariEfektif > hari) hari = c.hariEfektif; return Object.assign({ nis: s.username, nama: s.nama }, c); });
-  S.cache.rekap = { rows, namaKelas, bulan };
+  S.cache.rekap = { rows, namaKelas, bulan, hari };
   const html = pageHead('Rekap Bulanan ' + namaKelas, hari + ' hari efektif') + kelasTabsHtml(kt.ks, kt.id, 'pilihKelas') + monthNav(bulan) +
     '<div class="table-wrap"><table><thead><tr><th>Nama</th><th class="num">H</th><th class="num">T</th><th class="num">I</th><th class="num">S</th><th class="num">A</th><th class="num">%</th></tr></thead><tbody>' +
     rows.map(s => '<tr><td><div class="bold">' + esc(s.nama) + '</div><div class="xs muted">' + esc(s.nis) + '</div></td><td class="num tnum">' + s.hadir + '</td><td class="num tnum">' + s.terlambat + '</td><td class="num tnum">' + s.izin + '</td><td class="num tnum">' + s.sakit + '</td><td class="num tnum">' + s.alpha + '</td><td class="num tnum bold">' + s.persen + '</td></tr>').join('') + '</tbody></table></div>' +
-    '<div class="small muted">H = Hadir, T = Terlambat, I = Izin, S = Sakit, A = Alpha, % = persentase kehadiran (hadir + terlambat).</div><div><button class="btn sm ghost" data-act="csvRekap">' + ic('download', 'sm') + ' Unduh CSV</button></div>';
+    '<div class="small muted">H = Hadir, T = Terlambat, I = Izin, S = Sakit, A = Alpha, % = persentase kehadiran (hadir + terlambat).</div><div class="row wrap"><button class="btn sm ghost" data-act="csvRekap">' + ic('download', 'sm') + ' Unduh CSV</button><button class="btn sm ghost" data-act="pdfWaliRekap">' + ic('file', 'sm') + ' Cetak PDF</button></div>';
   return { html };
 };
 
@@ -1576,8 +1680,10 @@ VIEWS.a_dash = async () => {
   const html = pageHead('Dashboard', fmtTgl(tgl), '<div class="row wrap"><button class="btn sm ghost" data-act="tglGeserA" data-d="-1" aria-label="Hari sebelumnya">&#8249;</button><input class="inp" style="width:auto;min-height:36px;padding:4px 14px" type="date" id="tglPickA" value="' + tgl + '" aria-label="Pilih tanggal"><button class="btn sm ghost" data-act="tglGeserA" data-d="1" aria-label="Hari berikutnya">&#8250;</button></div>') +
     (jOk ? '' : '<div class="notice warn">' + ic('alert') + '<div>Jadwal dan lokasi sekolah belum disimpan. Buka <b>Pengaturan</b> lalu simpan agar siswa dapat absen.</div></div>') +
     (menunggu ? '<button class="notice warn" style="border:0;width:100%;text-align:left;cursor:pointer" data-act="nav" data-route="a_izin">' + ic('file') + '<div><b>' + menunggu + ' pengajuan izin</b> menunggu verifikasi. Ketuk untuk membuka.</div></button>' : '') +
+    '<button class="mode-card ' + (isPJJ(j) ? 'pjj' : 'sekolah') + '" style="width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit" data-act="setTab" data-v="mode">' + ic(modeInfo(j).icon) + '<div><b>Sistem absen aktif: ' + esc(modeInfo(j).nama) + '</b><span>Ketuk untuk mengubah di Pengaturan.</span></div></button>' +
     (isSchool(tgl, j) ? '' : '<div class="notice warn">' + ic('info') + '<div>Tanggal ini bukan hari sekolah.</div></div>') +
     '<div class="card stack"><div class="row between"><h3>Kehadiran seluruh sekolah</h3><span class="bold tnum">' + pct + '%</span></div><div class="bar"><i style="width:' + pct + '%"></i></div><div class="tiles">' + ['Hadir', 'Terlambat', 'Izin', 'Sakit', 'Alpha', 'Belum'].map(k => '<div class="tile t-' + k + '"><b class="tnum">' + ring[k] + '</b><span>' + k + '</span></div>').join('') + '</div><div class="small muted">Total ' + siswa.length + ' siswa aktif</div></div>' +
+    '<div class="card stack"><div class="row between wrap"><div><h3>Siswa tidak hadir</h3><div class="small muted">Alpha ' + ring.Alpha + ' · Izin ' + ring.Izin + ' · Sakit ' + ring.Sakit + (ring.Belum ? ' · ' + ring.Belum + ' belum absen' : '') + '</div></div><button class="btn sm" data-act="laporanHarian" data-t="' + tgl + '">' + ic('file', 'sm') + ' Laporan &amp; PDF</button></div></div>' +
     '<div class="card"><h3>Per kelas</h3>' + (per.length ? '<div class="list">' + per.map(k => { const p = k.total ? Math.round((k.Hadir + k.Terlambat) / k.total * 100) : 0; return '<button class="item" style="width:100%;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;cursor:pointer;color:inherit" data-act="bukaKelas" data-id="' + esc(k.kelasId) + '" data-t="' + tgl + '"><div class="grow"><div class="ttl">' + esc(k.namaKelas) + '</div><div class="bar" style="margin:6px 0"><i style="width:' + p + '%"></i></div><div class="sub tnum">H ' + k.Hadir + ' · T ' + k.Terlambat + ' · I ' + k.Izin + ' · S ' + k.Sakit + ' · A ' + k.Alpha + ' · Belum ' + k.Belum + '</div></div><b class="tnum">' + p + '%</b></button>'; }).join('') + '</div>' : emptyBox('Belum ada kelas. Tambahkan di menu Kelas.', 'book')) + '</div>' +
     '<div class="card stack"><h3>Tren kehadiran 7 hari sekolah terakhir</h3>' + (tren.length ? '<div class="chart">' + tren.map(x => '<div class="c"><b class="tnum">' + x.persen + '</b><i style="height:' + Math.max(3, x.persen) + '%" title="' + esc(fmtPendek(x.tanggal)) + ': ' + x.persen + '%"></i><span>' + parseYmd(x.tanggal).getDate() + '/' + (parseYmd(x.tanggal).getMonth() + 1) + '</span></div>').join('') + '</div>' : emptyBox('Belum ada data.', 'chart')) + '</div>';
   return { html, after: () => { $('#tglPickA').onchange = e => { if (e.target.value) go('a_dash', { tanggal: e.target.value }); }; } };
@@ -1623,9 +1729,71 @@ async function buildLaporan(f) {
   ds.forEach(d => siswa.forEach(s => { const x = dayOf(ctx, s, d); if (x.status === 'Libur' || x.status === 'Belum') return; out.push({ tanggal: d, nis: s.username, nama: s.nama, kelas: km[s.kelasId] || '-', status: x.status, jamMasuk: x.jamMasuk ? x.jamMasuk.slice(0, 5) : '', jamPulang: x.jamPulang ? x.jamPulang.slice(0, 5) : '', jarak: x.jarak, catatan: x.catatan || '' }); }));
   return out;
 }
-VIEWS.a_laporan = async () => {
+
+/* ============================ CETAK PDF (dialog cetak peramban > Simpan sebagai PDF) ============================ */
+function cetakPdf(judul, isi, sub) {
+  const old = $('#printHost'); if (old) old.remove();
+  const h = document.createElement('div'); h.id = 'printHost';
+  const w = wibParts(nowTs());
+  h.innerHTML = '<div class="kop"><img alt="" src="' + esc(logoSrc()) + '"><div><b>' + esc(S.pub.namaSekolah) + '</b><span>Laporan Absensi Siswa</span></div></div><h1>' + esc(judul) + '</h1>' + (sub ? '<div class="sub">' + esc(sub) + '</div>' : '') + isi +
+    '<div class="foot">Dicetak ' + esc(fmtPendek(w.tanggal)) + ' ' + esc(w.jam.slice(0, 5)) + ' WIB oleh ' + esc(S.user ? S.user.nama : '-') + '</div>';
+  document.body.appendChild(h);
+  if (cetakPdf.dt == null) cetakPdf.dt = document.title; document.title = judul.replace(/[\\/:*?"<>|]+/g, ' ');
+  const bersih = () => { const e = $('#printHost'); if (e) e.remove(); if (cetakPdf.dt != null) { document.title = cetakPdf.dt; cetakPdf.dt = null; } window.removeEventListener('afterprint', bersih); };
+  window.addEventListener('afterprint', bersih);
+  setTimeout(() => { try { window.print(); } catch (e) { bersih(); toast('Peramban tidak dapat membuka dialog cetak.', 'bad'); } }, 250);
+  setTimeout(() => { if ($('#printHost')) bersih(); }, 120000);
+}
+const tabelCetak = (head, rows) => '<table><thead><tr>' + head.map(x => '<th>' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' + (rows.length ? rows.map(r => '<tr>' + r.map(c => '<td>' + esc(c) + '</td>').join('') + '</tr>').join('') : '<tr><td colspan="' + head.length + '" style="text-align:center">Tidak ada data.</td></tr>') + '</tbody></table>';
+
+/* Siswa tidak hadir pada satu hari: Alpha (termasuk yang tidak absen masuk), Izin, Sakit */
+async function buildTidakHadir(tgl, kelasId) {
+  const j = await ensureJadwal(true), t = today();
+  if (!validDate(tgl)) throw new Error('Tanggal tidak valid.');
+  const [siswa, kelas, izs, recs] = await Promise.all([api('listSiswa', kelasId), api('listKelas'), api('izinApprovedKelas', kelasId), kelasId === 'ALL' ? api('absAllDay', tgl) : api('absKelasDay', kelasId, tgl)]);
+  const ctx = makeCtx(j, recs, izs), km = {}; kelas.forEach(k => { km[k.kelasId] = k.namaKelas; });
+  const rows = [], c = { Alpha: 0, Izin: 0, Sakit: 0, Belum: 0 };
+  siswa.forEach(u => {
+    const x = dayOf(ctx, u, tgl);
+    if (x.status === 'Belum') c.Belum++;
+    if (x.status !== 'Alpha' && x.status !== 'Izin' && x.status !== 'Sakit') return;
+    c[x.status]++;
+    rows.push({ kelas: km[u.kelasId] || '-', nis: u.username, nama: u.nama, status: x.status, ket: x.status === 'Alpha' ? (x.jamMasuk ? (x.catatan || '') : 'Tidak absen masuk') : (x.catatan || '') });
+  });
+  rows.sort((a, b) => String(a.kelas).localeCompare(String(b.kelas), undefined, { numeric: true }) || a.nama.localeCompare(b.nama));
+  return { rows, c, tgl, sekolah: isSchool(tgl, j), total: siswa.length, kelasNama: kelasId === 'ALL' ? 'Semua kelas' : (km[kelasId] || '-') };
+}
+const htmlTidakHadir = r => '<div class="card stack"><div class="row between wrap"><h3>' + r.rows.length + ' siswa tidak hadir</h3><div class="row wrap"><button class="btn sm" data-act="pdfHarian">' + ic('file', 'sm') + ' Cetak PDF</button><button class="btn sm ghost" data-act="csvTidakHadir">' + ic('download', 'sm') + ' CSV</button></div></div>' +
+  '<div class="tiles">' + ['Alpha', 'Izin', 'Sakit'].map(k => '<div class="tile t-' + k + '"><b class="tnum">' + r.c[k] + '</b><span>' + k + '</span></div>').join('') + '</div>' +
+  (r.c.Belum ? '<div class="notice warn">' + ic('info') + '<div>' + r.c.Belum + ' siswa belum absen dan masih dalam batas waktu absen masuk. Setelah batas tutup, yang tidak absen otomatis tercatat Alpha.</div></div>' : '') +
+  (r.sekolah ? '' : '<div class="notice warn">' + ic('info') + '<div>Tanggal ini bukan hari sekolah.</div></div>') +
+  (r.rows.length ? '<div class="table-wrap"><table><thead><tr><th>Kelas</th><th>NIS</th><th>Nama</th><th>Status</th><th>Keterangan</th></tr></thead><tbody>' + r.rows.map(x => '<tr><td>' + esc(x.kelas) + '</td><td>' + esc(x.nis) + '</td><td>' + esc(x.nama) + '</td><td>' + pill(x.status) + '</td><td>' + esc(x.ket || '-') + '</td></tr>').join('') + '</tbody></table></div>' : emptyBox('Tidak ada siswa yang tidak hadir.', 'check')) + '</div>';
+
+/* Rekap kehadiran per kelas (satu halaman per kelas) */
+async function buildRekapKelas(f) {
+  const j = await ensureJadwal(true), t = today();
+  if (!validDate(f.dari) || !validDate(f.sampai) || f.sampai < f.dari) throw new Error('Periode tidak valid.');
+  const sampai = f.sampai > t ? t : f.sampai, ds = datesBetween(f.dari, sampai);
+  if (ds.length > 92) throw new Error('Periode maksimal 92 hari.');
+  const [siswa, kelas, izs, users] = await Promise.all([api('listSiswa', f.kelasId), api('listKelas'), api('izinApprovedKelas', f.kelasId), api('listUsers').catch(() => [])]);
+  if (siswa.length * ds.length > 40000) throw new Error('Data terlalu besar. Persempit periode atau pilih satu kelas.');
+  const recs = [].concat(...(await Promise.all(monthsBetween(f.dari, sampai).map(m => api('absKelasMonth', f.kelasId, m)))));
+  const ctx = makeCtx(j, recs, izs), wm = {}; (users || []).forEach(u => { wm[u.userId] = u.nama; });
+  const ks = kelas.filter(k => f.kelasId === 'ALL' || k.kelasId === f.kelasId).sort((a, b) => String(a.namaKelas).localeCompare(String(b.namaKelas), undefined, { numeric: true }));
+  const out = ks.map(k => {
+    const rows = siswa.filter(u => u.kelasId === k.kelasId).map(u => { const c = count(ds.map(d => dayOf(ctx, u, d))); return Object.assign({ nis: u.username, nama: u.nama }, c); });
+    return { kelasId: k.kelasId, namaKelas: k.namaKelas, wali: wm[k.waliKelasId] || (S.user && S.user.role === 'walikelas' ? S.user.nama : ''), rows, hari: rows.reduce((m, x) => Math.max(m, x.hariEfektif), 0) };
+  }).filter(k => k.rows.length);
+  return { kelas: out, dari: f.dari, sampai };
+}
+const rekapKelasCetak = r => r.kelas.map(k => '<div class="pg"><div class="sub"><b>Kelas ' + esc(k.namaKelas) + '</b> &middot; Periode ' + esc(fmtPendek(r.dari)) + ' s.d. ' + esc(fmtPendek(r.sampai)) + ' &middot; ' + k.hari + ' hari efektif</div>' +
+  tabelCetak(['No', 'NIS', 'Nama', 'H', 'T', 'I', 'S', 'A', '%'], k.rows.map((x, i) => [i + 1, x.nis, x.nama, x.hadir, x.terlambat, x.izin, x.sakit, x.alpha, x.persen])) +
+  '<div class="sub" style="text-align:left;font-size:10px">H = Hadir, T = Terlambat, I = Izin, S = Sakit, A = Alpha, % = persentase kehadiran (hadir + terlambat).</div>' +
+  '<div class="ttd"><div>Wali Kelas<br><br><br><br><b><u>' + esc(k.wali || '.....................') + '</u></b></div></div></div>').join('');
+
+async function lapPeriode() {
   const kelas = (await api('listKelas')).sort((a, b) => String(a.namaKelas).localeCompare(String(b.namaKelas), undefined, { numeric: true })), t = today();
-  const html = pageHead('Laporan Absensi', 'Pilih periode lalu tampilkan atau unduh sebagai CSV.') +
+  const html =
     '<div class="card stack"><div class="grid2"><label class="f" for="lpDari">Dari tanggal<input class="inp" type="date" id="lpDari" value="' + t.slice(0, 8) + '01"></label><label class="f" for="lpSampai">Sampai tanggal<input class="inp" type="date" id="lpSampai" value="' + t + '"></label></div>' +
     '<label class="f" for="lpKelas">Kelas<select class="inp" id="lpKelas"><option value="ALL">Semua kelas</option>' + kelas.map(k => '<option value="' + esc(k.kelasId) + '">' + esc(k.namaKelas) + '</option>').join('') + '</select></label><div class="row wrap"><button class="btn" id="lpGo">' + ic('chart') + ' Tampilkan</button></div></div><div id="lpOut"></div>';
   return {
@@ -1640,16 +1808,51 @@ VIEWS.a_laporan = async () => {
       };
     }
   };
+}
+
+
+const lapTabs = tab => '<div class="tabs">' + [['harian', 'Tidak Hadir Harian'], ['kelas', 'Rekap Per Kelas'], ['periode', 'Data Periode']].map(t => '<button class="' + (tab === t[0] ? 'on' : '') + '" data-act="lapTab" data-v="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>';
+VIEWS.a_laporan = async () => {
+  const tab = S.params.tab || 'harian', t = today();
+  const kelas = (await api('listKelas')).sort((a, b) => String(a.namaKelas).localeCompare(String(b.namaKelas), undefined, { numeric: true }));
+  const opt = sel => '<option value="ALL">Semua kelas</option>' + kelas.map(k => '<option value="' + esc(k.kelasId) + '"' + (sel === k.kelasId ? ' selected' : '') + '>' + esc(k.namaKelas) + '</option>').join('');
+  const head = pageHead('Laporan Absensi', 'Laporan harian, rekap per kelas (PDF), dan data periode (CSV).') + lapTabs(tab);
+  if (tab === 'periode') { const r = await lapPeriode(); return { html: head + r.html, after: r.after }; }
+  if (tab === 'kelas') {
+    const html = head + '<div class="card stack"><div class="grid2"><label class="f" for="rkDari">Dari tanggal<input class="inp" type="date" id="rkDari" value="' + t.slice(0, 8) + '01"></label><label class="f" for="rkSampai">Sampai tanggal<input class="inp" type="date" id="rkSampai" value="' + t + '"></label></div>' +
+      '<label class="f" for="rkKelas">Kelas<select class="inp" id="rkKelas">' + opt('ALL') + '</select></label><div class="row wrap"><button class="btn" id="rkGo">' + ic('chart') + ' Tampilkan</button><button class="btn soft" id="rkPdf">' + ic('file') + ' Cetak PDF</button></div><div class="small muted">PDF dibuat satu halaman per kelas, lengkap dengan kolom tanda tangan wali kelas. Pada dialog cetak pilih <b>Simpan sebagai PDF</b>.</div></div><div id="rkOut"></div>';
+    return {
+      html, after: () => {
+        const ambil = async () => { const f = { dari: $('#rkDari').value, sampai: $('#rkSampai').value, kelasId: $('#rkKelas').value }; const r = await run(() => buildRekapKelas(f)); if (r) S.cache.rekapKelas = r; return r; };
+        $('#rkGo').onclick = async () => {
+          const r = await ambil(); if (!r) return;
+          $('#rkOut').innerHTML = r.kelas.length ? r.kelas.map(k => '<div class="card stack"><div class="row between"><h3>Kelas ' + esc(k.namaKelas) + '</h3><span class="small muted">' + k.rows.length + ' siswa · ' + k.hari + ' hari efektif</span></div><div class="table-wrap"><table><thead><tr><th>Nama</th><th class="num">H</th><th class="num">T</th><th class="num">I</th><th class="num">S</th><th class="num">A</th><th class="num">%</th></tr></thead><tbody>' + k.rows.map(x => '<tr><td><div class="bold">' + esc(x.nama) + '</div><div class="xs muted">' + esc(x.nis) + '</div></td><td class="num tnum">' + x.hadir + '</td><td class="num tnum">' + x.terlambat + '</td><td class="num tnum">' + x.izin + '</td><td class="num tnum">' + x.sakit + '</td><td class="num tnum">' + x.alpha + '</td><td class="num tnum bold">' + x.persen + '</td></tr>').join('') + '</tbody></table></div></div>').join('') : '<div class="card">' + emptyBox('Tidak ada data siswa.', 'chart') + '</div>';
+        };
+        $('#rkPdf').onclick = async () => { const r = await ambil(); if (!r) return; if (!r.kelas.length) return toast('Tidak ada data untuk dicetak.', 'bad'); cetakPdf('Rekap Kehadiran Siswa Per Kelas', rekapKelasCetak(r), 'Periode ' + fmtPendek(r.dari) + ' s.d. ' + fmtPendek(r.sampai)); };
+      }
+    };
+  }
+  const tgl = S.params.tanggal || t, kid = S.params.kelasId || 'ALL';
+  const r = await buildTidakHadir(tgl, kid); S.cache.tidakHadir = r;
+  const html = head + '<div class="card stack"><div class="grid2"><label class="f" for="thTgl">Tanggal<input class="inp" type="date" id="thTgl" value="' + tgl + '"></label><label class="f" for="thKelas">Kelas<select class="inp" id="thKelas">' + opt(kid) + '</select></label></div>' +
+    '<div class="small muted">Siswa yang tidak absen masuk sampai batas pukul ' + esc((S.jadwal || {}).jamTutupMasuk || '-') + ' WIB otomatis tercatat Alpha dan tidak dapat absen pulang.</div></div>' + htmlTidakHadir(r);
+  return { html, after: () => { const go2 = () => go('a_laporan', { tab: 'harian', tanggal: $('#thTgl').value || tgl, kelasId: $('#thKelas').value }); $('#thTgl').onchange = go2; $('#thKelas').onchange = go2; } };
 };
 
 /* ----- Pengaturan: Jadwal | Lokasi Sekolah | Tampilan ----- */
 const osmSrc = (lat, lng) => 'https://www.openstreetmap.org/export/embed.html?bbox=' + [lng - 0.004, lat - 0.003, lng + 0.004, lat + 0.003].join('%2C') + '&layer=mapnik&marker=' + lat + '%2C' + lng;
 VIEWS.a_setting = async () => {
-  const tab = S.params.tab || 'jadwal', cur = (await ensureJadwal(false)) || normJadwal(DEFAULT_JADWAL), adm = await api('getAdminSettings'), p = S.pub;
-  const tabs = '<div class="tabs">' + [['jadwal', 'Jadwal'], ['lokasi', 'Lokasi Sekolah'], ['tampilan', 'Tampilan']].map(t => '<button class="' + (tab === t[0] ? 'on' : '') + '" data-act="setTab" data-v="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>';
+  const tab = S.params.tab || 'mode', cur = (await ensureJadwal(false)) || normJadwal(DEFAULT_JADWAL), adm = await api('getAdminSettings'), p = S.pub;
+  const tabs = '<div class="tabs">' + [['mode', 'Mode Absen'], ['jadwal', 'Jadwal'], ['lokasi', 'Lokasi Sekolah'], ['tampilan', 'Tampilan']].map(t => '<button class="' + (tab === t[0] ? 'on' : '') + '" data-act="setTab" data-v="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>';
   const warn = S.jadwal ? '' : '<div class="notice warn">' + ic('alert') + '<div>Jadwal dan lokasi sekolah belum pernah disimpan. Periksa nilai di bawah lalu simpan pada tab Jadwal dan Lokasi agar siswa dapat absen.</div></div>';
   let body = '';
-  if (tab === 'jadwal') {
+  if (tab === 'mode') {
+    const pj = isPJJ(cur);
+    body = '<form class="card stack" id="modeForm"><h3>Sistem absen aktif</h3><p class="small muted">Pilih cara siswa melakukan absen. Perubahan berlaku seketika untuk semua siswa dan tampil di dashboard mereka.</p><div class="mode-opts">' +
+      '<label class="mode-opt"><input type="radio" name="modeAbsen" value="sekolah"' + (pj ? '' : ' checked') + '><div><b>Absen di Sekolah (KBM seperti biasa)</b><span>Siswa wajib berada di area sekolah. Foto selfie dan lokasi GPS divalidasi.</span></div></label>' +
+      '<label class="mode-opt"><input type="radio" name="modeAbsen" value="pjj"' + (pj ? ' checked' : '') + '><div><b>Absen di Rumah (PJJ)</b><span>Validasi lokasi dimatikan agar siswa dapat absen dari rumah. Foto selfie wajah tetap diwajibkan.</span></div></label></div>' +
+      '<div class="notice warn">' + ic('info') + '<div>Saat mode PJJ aktif, jam absen, aturan terlambat, dan aturan Alpha tetap berlaku. Siswa yang tidak absen masuk sampai batas tutup tercatat Alpha dan tidak dapat absen pulang.</div></div><button class="btn" type="submit">Simpan mode absen</button></form>';
+  } else if (tab === 'jadwal') {
     const dn = [[1, 'Sen'], [2, 'Sel'], [3, 'Rab'], [4, 'Kam'], [5, 'Jum'], [6, 'Sab'], [0, 'Min']];
     body = '<form class="card stack" id="setForm"><h3>Jadwal absensi (WIB)</h3><div class="grid2">' +
       '<label class="f" for="stBuka">Absen masuk dibuka<input class="inp" type="time" id="stBuka" value="' + esc(cur.jamBukaMasuk) + '"></label><label class="f" for="stMasuk">Batas tepat waktu<input class="inp" type="time" id="stMasuk" value="' + esc(cur.jamMasuk) + '"></label>' +
@@ -1663,7 +1866,7 @@ VIEWS.a_setting = async () => {
     body = '<form class="card stack" id="lokForm"><h3>Lokasi sekolah</h3><p class="small muted">Siswa hanya dapat absen jika posisi GPS berada di dalam radius dari titik ini. Server juga memeriksa ulang jaraknya.</p>' +
       '<div class="grid2"><label class="f" for="lkLat">Latitude<input class="inp" id="lkLat" inputmode="decimal" value="' + esc(L.lat) + '"></label><label class="f" for="lkLng">Longitude<input class="inp" id="lkLng" inputmode="decimal" value="' + esc(L.lng) + '"></label>' +
       '<label class="f" for="lkRad">Radius absen (meter)<input class="inp" type="number" id="lkRad" min="20" max="2000" value="' + esc(L.radius) + '"></label><label class="f" for="lkAk">Akurasi GPS maksimal (meter)<input class="inp" type="number" id="lkAk" min="10" max="500" value="' + esc(L.maxAkurasi) + '"></label></div>' +
-      '<label class="switch" for="lkWajib"><input type="checkbox" id="lkWajib"' + (L.wajib ? ' checked' : '') + '>Wajibkan validasi lokasi saat absen</label>' +
+      (isPJJ(cur) ? '<div class="notice warn">' + ic('info') + '<div>Mode PJJ sedang aktif, sehingga validasi lokasi tidak dipakai. Pengaturan ini berlaku kembali saat mode Sekolah diaktifkan.</div></div>' : '') + '<label class="switch" for="lkWajib"><input type="checkbox" id="lkWajib"' + (L.wajib ? ' checked' : '') + '>Wajibkan validasi lokasi saat absen</label>' +
       '<div class="row wrap"><button type="button" class="btn sm soft" id="lkNow">' + ic('target', 'sm') + ' Gunakan lokasi saya sekarang</button><a class="btn sm ghost" id="lkMaps" target="_blank" rel="noopener">' + ic('pin', 'sm') + ' Buka di peta</a></div>' +
       '<iframe class="mapframe" id="lkMap" title="Pratinjau lokasi sekolah" loading="lazy" referrerpolicy="no-referrer"></iframe><div id="lkErr" class="err" hidden></div><button class="btn" type="submit">Simpan lokasi</button></form>';
   } else {
@@ -1676,6 +1879,10 @@ VIEWS.a_setting = async () => {
   return {
     html, after: () => {
       const saveJ = async obj => { const r = await run(() => api('saveJadwal', Object.assign({}, cur, obj))); if (r) { S.jadwal = r; toast('Tersimpan', 'ok'); } return r; };
+      if (tab === 'mode') $('#modeForm').onsubmit = async ev => {
+        ev.preventDefault(); const v = ($('input[name="modeAbsen"]:checked') || {}).value === 'pjj' ? 'pjj' : 'sekolah';
+        const r = await saveJ({ modeAbsen: v }); if (r) go('a_setting', { tab: 'mode' });
+      };
       if (tab === 'jadwal') $('#setForm').onsubmit = async ev => {
         ev.preventDefault(); const err = $('#stErr'); err.hidden = true; const bad = m => { err.textContent = m; err.hidden = false; };
         const hari = $$('#stHari button.on').map(b => Number(b.dataset.v));
@@ -1746,6 +1953,16 @@ ACT.tglGeser = el => go('w_dash', Object.assign({}, S.params, { tanggal: addDays
 ACT.tglGeserA = el => go('a_dash', { tanggal: addDays(S.params.tanggal || today(), Number(el.dataset.d)) });
 ACT.bukaKelas = el => go('w_dash', { kelasId: el.dataset.id, tanggal: el.dataset.t });
 ACT.hari = el => el.classList.toggle('on');
+ACT.kalGeser = el => go('beranda', { kal: shiftBulan(S.params.kal || today().slice(0, 7), Number(el.dataset.d)) });
+ACT.kalDay = el => {
+  const t = el.dataset.d, x = (S.cache.kal || {})[t], box = $('#kalDetail'); if (!x || !box) return;
+  $$('.cal-d.sel').forEach(e => e.classList.remove('sel')); el.classList.add('sel');
+  let tx = '<b>' + esc(fmtTgl(t)) + '</b><br>Status: ' + esc(x.status || '-');
+  if (x.jamMasuk) tx += '<br>Masuk ' + esc(x.jamMasuk) + ' WIB' + (x.jamPulang ? ' · Pulang ' + esc(x.jamPulang) + ' WIB' : '');
+  if (x.mode === 'pjj') tx += '<br>Absen via PJJ';
+  if (x.catatan) tx += '<br>Catatan: ' + esc(x.catatan);
+  box.innerHTML = tx;
+};
 ACT.setTab = el => go('a_setting', { tab: el.dataset.v });
 ACT.fRole = el => go('a_pengguna', { f: Object.assign({}, S.params.f || { kelasId: '', q: '' }, { role: el.dataset.v }) });
 ACT.koreksi = el => {
@@ -1761,6 +1978,12 @@ ACT.izinPutus = el => {
 ACT.csvHarian = () => { const c = S.cache.harian; if (!c) return; downloadCSV('kehadiran-' + c.namaKelas + '-' + c.tanggal + '.csv', [['NIS', 'Nama', 'Status', 'Jam Masuk', 'Jam Pulang', 'Jarak (m)', 'Catatan']].concat(c.rows.map(s => [s.nis, s.nama, s.status, s.jamMasuk ? hm(s.jamMasuk) : '', s.jamPulang ? hm(s.jamPulang) : '', s.jarak, s.catatan]))); };
 ACT.csvRekap = () => { const c = S.cache.rekap; if (!c) return; downloadCSV('rekap-' + c.namaKelas + '-' + c.bulan + '.csv', [['NIS', 'Nama', 'Hadir', 'Terlambat', 'Izin', 'Sakit', 'Alpha', 'Persen Kehadiran']].concat(c.rows.map(s => [s.nis, s.nama, s.hadir, s.terlambat, s.izin, s.sakit, s.alpha, s.persen]))); };
 const laporanRows = () => { const c = S.cache.laporan; return c ? [['Tanggal', 'NIS', 'Nama', 'Kelas', 'Status', 'Jam Masuk', 'Jam Pulang', 'Jarak (m)', 'Catatan']].concat(c.rows.map(x => [x.tanggal, x.nis, x.nama, x.kelas, x.status, x.jamMasuk, x.jamPulang, x.jarak, x.catatan])) : null; };
+ACT.laporanHarian = el => go('a_laporan', { tab: 'harian', tanggal: el.dataset.t });
+ACT.lapTab = el => go('a_laporan', { tab: el.dataset.v });
+ACT.pdfHarian = () => { const r = S.cache.tidakHadir; if (!r) return; cetakPdf('Laporan Harian Siswa Tidak Hadir', tabelCetak(['No', 'Kelas', 'NIS', 'Nama', 'Status', 'Keterangan'], r.rows.map((x, i) => [i + 1, x.kelas, x.nis, x.nama, x.status, x.ket || '-'])) + '<div class="sub" style="text-align:left">Alpha: ' + r.c.Alpha + ' &middot; Izin: ' + r.c.Izin + ' &middot; Sakit: ' + r.c.Sakit + ' &middot; Total tidak hadir: ' + r.rows.length + ' dari ' + r.total + ' siswa</div>', fmtTgl(r.tgl) + ' - ' + r.kelasNama); };
+ACT.csvTidakHadir = () => { const r = S.cache.tidakHadir; if (r) downloadCSV('tidak-hadir-' + r.tgl + '.csv', [['Kelas', 'NIS', 'Nama', 'Status', 'Keterangan']].concat(r.rows.map(x => [x.kelas, x.nis, x.nama, x.status, x.ket]))); };
+ACT.pdfWaliRekap = () => { const c = S.cache.rekap; if (!c) return; cetakPdf('Rekap Kehadiran Kelas ' + c.namaKelas, '<div class="pg"><div class="sub">' + c.hari + ' hari efektif</div>' + tabelCetak(['No', 'NIS', 'Nama', 'H', 'T', 'I', 'S', 'A', '%'], c.rows.map((x, i) => [i + 1, x.nis, x.nama, x.hadir, x.terlambat, x.izin, x.sakit, x.alpha, x.persen])) + '<div class="ttd"><div>Wali Kelas<br><br><br><br><b><u>' + esc(S.user.nama) + '</u></b></div></div></div>', 'Bulan ' + fmtBulan(c.bulan)); };
+ACT.pdfWaliHarian = () => { const c = S.cache.harian; if (!c) return; const rows = c.rows.filter(x => x.status === 'Alpha' || x.status === 'Izin' || x.status === 'Sakit'); cetakPdf('Laporan Harian Siswa Tidak Hadir', tabelCetak(['No', 'NIS', 'Nama', 'Status', 'Keterangan'], rows.map((x, i) => [i + 1, x.nis, x.nama, x.status, x.status === 'Alpha' && !x.jamMasuk ? 'Tidak absen masuk' : (x.catatan || '-')])), fmtTgl(c.tanggal) + ' - Kelas ' + c.namaKelas); };
 ACT.csvLaporan = () => { const r = laporanRows(); if (r) downloadCSV('laporan-absensi-' + S.cache.laporan.f.dari + '_' + S.cache.laporan.f.sampai + '.csv', r); };
 ACT.salinLaporan = async () => {
   const r = laporanRows(); if (!r) return; const text = r.map(x => x.map(csvEscape).join('\t')).join('\n');
